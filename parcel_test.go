@@ -43,13 +43,9 @@ func getDB() (*sql.DB, error) {
 func TestAddGetDelete(t *testing.T) {
 	// prepare
 	db, err := getDB()
-	if err != nil {
-		require.NoError(t, err)
-	}
+	require.NoError(t, err)
 	err = truncate(db)
-	if err != nil {
-		require.NoError(t, err)
-	}
+	require.NoError(t, err)
 	defer db.Close()
 
 	store := NewParcelStore(db)
@@ -87,13 +83,9 @@ func TestAddGetDelete(t *testing.T) {
 func TestSetAddress(t *testing.T) {
 	// prepare
 	db, err := getDB()
-	if err != nil {
-		require.NoError(t, err)
-	}
+	require.NoError(t, err)
 	err = truncate(db)
-	if err != nil {
-		require.NoError(t, err)
-	}
+	require.NoError(t, err)
 	defer db.Close()
 
 	store := NewParcelStore(db)
@@ -125,13 +117,9 @@ func TestSetAddress(t *testing.T) {
 func TestSetStatus(t *testing.T) {
 	// prepare
 	db, err := getDB()
-	if err != nil {
-		require.NoError(t, err)
-	}
+	require.NoError(t, err)
 	err = truncate(db)
-	if err != nil {
-		require.NoError(t, err)
-	}
+	require.NoError(t, err)
 	defer db.Close()
 
 	store := NewParcelStore(db)
@@ -161,13 +149,9 @@ func TestSetStatus(t *testing.T) {
 func TestGetByClient(t *testing.T) {
 	// prepare
 	db, err := getDB()
-	if err != nil {
-		require.NoError(t, err)
-	}
+	require.NoError(t, err)
 	err = truncate(db)
-	if err != nil {
-		require.NoError(t, err)
-	}
+	require.NoError(t, err)
 	defer db.Close()
 
 	store := NewParcelStore(db)
@@ -210,6 +194,7 @@ func TestGetByClient(t *testing.T) {
 		// в parcelMap лежат добавленные посылки, ключ - идентификатор посылки, значение - сама посылка
 		// убедитесь, что все посылки из storedParcels есть в parcelMap
 		// убедитесь, что значения полей полученных посылок заполнены верно
+		require.Contains(t, parcelMap, parcel.Number)
 		assert.Equal(t, parcelMap[parcel.Number], parcel)
 	}
 }
